@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&display=swap');  /* import fonts from google fonts website */
+
+@tailwind base; /* Explanations below */
+@tailwind components;
+@tailwind utilities;
+
+/*
+@tailwind base;: This directive includes the base styles provided by Tailwind CSS. 
+It sets default styles for elements like headings, paragraphs, links, and form inputs. 
+
+@tailwind components;: This directive includes the pre-built components provided by Tailwind CSS. 
+These components are ready-to-use UI building blocks, such as buttons, cards, navigation bars, modals, and more. 
+
+@tailwind utilities;: This directive includes the utility classes provided by Tailwind CSS. 
+Examples of utility classes include margin, padding, text color, background color, flexbox, and grid-related classes.  
+*/
+
+html, /* css selectors but because they are separated by commas, everything in the .app will be applied to the html and body tags, as well as everything with an id of root [id = #] */
+body,
+#root,
+.app{ /* Default Set up */ 
+    height: 100%; /* set height and width to 100% of parent container */
+    width: 100%;
+    font-family: "DM Sans", sans-serif; /*sets font to DM Sans but if not available then it will fall onto the default sans-serif */
+    @apply text-blue-700;  /* @apply sets the default text color to gray-500, which is in our tailwind.config.js file */
+}
