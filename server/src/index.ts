@@ -6,6 +6,8 @@ import cors from 'cors';
 import express, {Request, Response} from "express" // Importing function from express package as well as Request and Response
 import mongoose from 'mongoose';
 import Card from "./Models/Card";
+import multer from 'multer'
+
 
 
 const app = express() // When we call the function, we get back this app 
@@ -34,6 +36,12 @@ app.post("/cards", async (req: Request, res: Response) => { // post method since
 
     const createdCard = await newCard.save(); // Since the save method is a promise then we need to await on it, which makes our function async
     res.json(createdCard)
+})
+
+app.delete('/cards/:cardID', async (req: Request, res: Response) => {  // cardId is a dynamic parameter
+   const cardID = req.params.cardID // grabs the cardID that was in the url/route 
+   const card = await Card.findByIdAndDelete(cardID) // finds that specific card in our database and then deletes it [returns the card that we deleted]
+   res.json(card)
 })
 
 mongoose
