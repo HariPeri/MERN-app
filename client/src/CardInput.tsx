@@ -1,19 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState /* useEffect */ } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { MdCloudUpload } from 'react-icons/md';
+
 import HText from './shared/HText';
 
 function CardInput() {
     const inputStyles =
-        'w-1/2 mb-2 rounded-lg bg-blue-400 px-5 py-3 placeholder-white';
-    const [title, setTitle] = useState('');
-    const [frontcardImage, setFrontCardImage] = useState('');
-    const [backcardImage, setBackCardImage] = useState('');
+        ' mb-2 rounded-lg bg-blue-400 px-5 py-3 placeholder-white text-white';
+    const [frontCardImage, setFrontCardImage] = useState<any>('');
+    const [backCardImage, setBackCardImage] = useState<any>('');
     const [playerName, setPlayerName] = useState('');
-    // const [cards, setCards] = useState<TDeck[]>([])
+    const [year, setYear] = useState('');
+    const [cardSet, setCardSet] = useState('');
+    const [cardType, setCardType] = useState('');
+    const [color, setColor] = useState('');
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardNumberedOutOf, setCardNumberedOutof] = useState('');
 
     const navigate = useNavigate();
+
+    function convertToBase64Front(e: React.ChangeEvent<HTMLInputElement>) {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files![0]);
+        reader.onload = () => {
+            // console.log(reader.result);
+            setFrontCardImage(reader.result);
+        };
+        /* reader.onerror = (error) => {
+            //console.log('Error: ', error);
+        }; */
+    }
+
+    function convertToBase64Back(e: React.ChangeEvent<HTMLInputElement>) {
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files![0]);
+        reader.onload = () => {
+            // console.log(reader.result);
+            setBackCardImage(reader.result);
+        };
+        /* reader.onerror = (error) => {
+            console.log('Error: ', error);
+        }; */
+    }
 
     const {
         register,
@@ -27,20 +59,35 @@ function CardInput() {
         const isValid = await trigger();
 
         if (isValid) {
-            console.log(title, playerName);
+            const date: Date = new Date();
+            const currentDay = String(date.getDate()).padStart(2, '0');
+            const currentMonth = String(date.getMonth() + 1).padStart(2, '0');
+            const currentYear = date.getFullYear();
+
+            const dateAcquired = `${currentMonth}/${currentDay}/${currentYear}`;
+
+            // (frontCardImage, backCardImage);
+
             await fetch('http://localhost:3001/cards', {
                 // First arg is url and second arg is some data like what type of request and the body [must be stringified]
                 method: 'POST',
                 body: JSON.stringify({
-                    title,
+                    frontCardImage,
+                    backCardImage,
+                    year,
                     playerName,
+                    cardSet,
+                    cardType,
+                    color,
+                    cardNumber,
+                    cardNumberedOutOf,
+                    dateAcquired,
                 }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            setTitle(''); // Clears out the input once it is added to our database
-            setPlayerName('');
+
             navigate('/');
         }
     }
@@ -50,51 +97,239 @@ function CardInput() {
             <div className="text-center mb-8">
                 <HText> Add a New Card </HText>
             </div>
-            <form className="flex flex-col mb-2" onSubmit={handleCreateCard}>
-                <input
-                    className={inputStyles}
-                    value={playerName}
-                    type="text"
-                    placeholder="PLAYER NAME"
-                    {...register('player', {
-                        required: true,
-                        maxLength: 100,
-                    })}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setPlayerName(e.target.value);
-                    }}
-                />
+            <form
+                className="md:grid grid-cols-2 gap-4"
+                onSubmit={handleCreateCard}
+            >
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                        <div className="relative h-64 mb-2 rounded-lg bg-blue-400">
+                            <input
+                                className="absolute opacity-0 h-full w-full z-[1]"
+                                type="file"
+                                accept="image/*"
+                                placeholder="cardImage"
+                                {...register('cardImage', {
+                                    validate: {
+                                        lessthan10mb: (files) =>
+                                            files[0]?.size < 30000 ||
+                                            'Max 30kb',
+                                    },
+                                })}
+                                onChange={convertToBase64Front}
+                            />
+                            <div className="py-20 flex flex-col justify-center text-center items-center text-white">
+                                {frontCardImage ? (
+                                    <p> </p>
+                                ) : (
+                                    <p> Browse Files to Upload </p>
+                                )}
+                                {frontCardImage ? (
+                                    <img
+                                        className="absolute top-4"
+                                        width={160}
+                                        height={350}
+                                        src={frontCardImage}
+                                        alt={frontCardImage}
+                                    />
+                                ) : (
+                                    <MdCloudUpload className="h-16 w-16" />
+                                )}
+                            </div>
+                        </div>
 
-                {errors.player && (
-                    <p className="mt-1 text-primary-500">
-                        {errors.player.type === 'required' &&
-                            'This field is required.'}
-                        {errors.player.type === 'maxLength' &&
-                            'Max Length is 100 characters.'}
-                    </p>
-                )}
-                <input
-                    className={inputStyles}
-                    value={title}
-                    type="text"
-                    placeholder="CARD TITLE"
-                    {...register('card_title', {
-                        required: true,
-                        maxLength: 100,
-                    })}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        setTitle(e.target.value);
-                    }}
-                />
+                        {errors.cardImage && (
+                            <p className=" text-primary-500">
+                                {errors.cardImage.type === 'lessthan10mb' &&
+                                    'This field is required.'}
+                            </p>
+                        )}
+                    </div>
+                    <div className="flex flex-col">
+                        <div className="relative h-64 mb-2 rounded-lg bg-blue-400">
+                            <input
+                                className="absolute opacity-0 h-full w-full z-[1]"
+                                type="file"
+                                accept="image/*"
+                                placeholder="cardImage2"
+                                {...register('cardImage2', {
+                                    validate: {
+                                        lessthan10mb: (files) =>
+                                            files[0]?.size < 30000 ||
+                                            'Max 30kb',
+                                    },
+                                })}
+                                onChange={convertToBase64Back}
+                            />
+                            <div className="py-20 flex flex-col justify-center text-center items-center text-white">
+                                {backCardImage ? (
+                                    <p> </p>
+                                ) : (
+                                    <p> Browse Files to Upload </p>
+                                )}
+                                {backCardImage ? (
+                                    <img
+                                        className="absolute top-4"
+                                        width={160}
+                                        height={350}
+                                        src={backCardImage}
+                                        alt={backCardImage}
+                                    />
+                                ) : (
+                                    <MdCloudUpload className="h-16 w-16" />
+                                )}
+                            </div>
+                        </div>
 
-                {errors.card_title && (
-                    <p className="mt-1 text-primary-500">
-                        {errors.card_title.type === 'required' &&
-                            'This field is required.'}
-                        {errors.card_title.type === 'maxLength' &&
-                            'Max Length is 100 characters.'}
-                    </p>
-                )}
+                        {errors.cardImage2 && (
+                            <p className=" text-primary-500">
+                                {errors.cardImage2.type === 'lessthan10mb' &&
+                                    'This field is required.'}
+                            </p>
+                        )}
+                    </div>
+                    <div className="flex flex-col">
+                        <input
+                            className={inputStyles}
+                            value={cardNumber}
+                            type="text"
+                            placeholder="CARD NUMBER"
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setCardNumber(e.target.value);
+                            }}
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <input
+                            className={inputStyles}
+                            value={cardNumberedOutOf}
+                            type="text"
+                            placeholder="CARD NUM OUT OF"
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setCardNumberedOutof(e.target.value);
+                            }}
+                        />
+                    </div>
+                </div>
+                <div className="flex flex-col mb-2">
+                    <input
+                        className={inputStyles}
+                        value={playerName}
+                        type="text"
+                        placeholder="PLAYER NAME"
+                        {...register('player', {
+                            required: true,
+                            maxLength: 100,
+                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setPlayerName(e.target.value);
+                        }}
+                    />
+
+                    {errors.player && (
+                        <p className=" text-primary-500">
+                            {errors.player.type === 'required' &&
+                                'This field is required.'}
+                            {errors.player.type === 'maxLength' &&
+                                'Max Length is 100 characters.'}
+                        </p>
+                    )}
+                    <input
+                        className={inputStyles}
+                        value={year}
+                        type="text"
+                        placeholder="YEAR"
+                        {...register('year', {
+                            required: true,
+                            maxLength: 100,
+                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setYear(e.target.value);
+                        }}
+                    />
+
+                    {errors.year && (
+                        <p className=" text-primary-500">
+                            {errors.year.type === 'required' &&
+                                'This field is required.'}
+                            {errors.year.type === 'maxLength' &&
+                                'Max Length is 100 characters.'}
+                        </p>
+                    )}
+
+                    <input
+                        className={inputStyles}
+                        value={cardSet}
+                        type="text"
+                        placeholder="CARD SET"
+                        {...register('cardset', {
+                            required: true,
+                            maxLength: 100,
+                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setCardSet(e.target.value);
+                        }}
+                    />
+
+                    {errors.cardset && (
+                        <p className=" text-primary-500">
+                            {errors.cardset.type === 'required' &&
+                                'This field is required.'}
+                            {errors.cardset.type === 'maxLength' &&
+                                'Max Length is 100 characters.'}
+                        </p>
+                    )}
+
+                    <input
+                        className={inputStyles}
+                        value={cardType}
+                        type="text"
+                        placeholder="CARD TYPE"
+                        {...register('cardtype', {
+                            required: true,
+                            maxLength: 100,
+                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setCardType(e.target.value);
+                        }}
+                    />
+
+                    {errors.cardtype && (
+                        <p className=" text-primary-500">
+                            {errors.cardtype.type === 'required' &&
+                                'This field is required.'}
+                            {errors.cardtype.type === 'maxLength' &&
+                                'Max Length is 100 characters.'}
+                        </p>
+                    )}
+
+                    <input
+                        className={inputStyles}
+                        value={color}
+                        type="text"
+                        placeholder="COLOR"
+                        {...register('cardcolor', {
+                            required: true,
+                            maxLength: 100,
+                        })}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            setColor(e.target.value);
+                        }}
+                    />
+
+                    {errors.cardcolor && (
+                        <p className=" text-primary-500">
+                            {errors.cardcolor.type === 'required' &&
+                                'This field is required.'}
+                            {errors.cardcolor.type === 'maxLength' &&
+                                'Max Length is 100 characters.'}
+                        </p>
+                    )}
+                </div>
 
                 <button
                     type="submit"

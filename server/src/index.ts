@@ -6,7 +6,6 @@ import cors from 'cors';
 import express, {Request, Response} from "express" // Importing function from express package as well as Request and Response
 import mongoose from 'mongoose';
 import Card from "./Models/Card";
-import multer from 'multer'
 
 
 
@@ -31,8 +30,18 @@ app.get('/cards',async (req: Request, res: Response) => {
 app.post("/cards", async (req: Request, res: Response) => { // post method since we are creating some sort of resource
     
     const newCard = new Card({
-        title: req.body.title,
-        playerName: req.body.playerName // the request is a json so we take in the body and then specifically the title part and that will be the new title of our object in the collection
+        frontCardImage: req.body.frontCardImage,
+        backCardImage: req.body.backCardImage,
+        playerName: req.body.playerName,
+        year: req.body.year,
+        cardSet: req.body.cardSet,
+        cardType: req.body.cardType,
+        color: req.body.color,
+        cardNumber: req.body.cardNumber,
+        cardNumberedOutOf: req.body.cardNumberedOutOf,
+        dateAcquired: req.body.dateAcquired,
+        
+        // the request is a json so we take in the body and then specifically the title part and that will be the new title of our object in the collection
     }); // Normal OOP where we are creating an object that takes in a javascript object with a title since that is in our myModel schema
 
     const createdCard = await newCard.save(); // Since the save method is a promise then we need to await on it, which makes our function async

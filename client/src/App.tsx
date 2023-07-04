@@ -2,8 +2,17 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type TDeck = {
-    title: string;
+    frontCardImage: string;
+    backCardImage: string;
     _id: string;
+    playerName: string;
+    year: string;
+    cardSet: string;
+    cardType: string;
+    color: string;
+    cardNumber: string;
+    cardNumberedOutOf: string;
+    dateAcquired: string;
 };
 
 function App() {
@@ -22,14 +31,14 @@ function App() {
 
     return (
         <div className="App h-full">
-            <ul className="cards py-5 flex gap-8 ml-5">
+            <ul className="cards py-5 flex gap-8 ml-5 flex-wrap">
                 {cards.map((card) => (
                     <li
-                        className="h-24 w-24 bg-blue-300 flex items-center justify-center flex-wrap"
+                        className="rounded-md h-36 w-36 bg-blue-300 flex items-center justify-center"
                         // eslint-disable-next-line no-underscore-dangle
                         key={card._id}
                     >
-                        {card.title}
+                        {card.playerName}
                     </li>
                 ))}
             </ul>
