@@ -1,19 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-type TDeck = {
-    frontCardImage: string;
-    backCardImage: string;
-    _id: string;
-    playerName: string;
-    year: string;
-    cardSet: string;
-    cardType: string;
-    color: string;
-    cardNumber: string;
-    cardNumberedOutOf: string;
-    dateAcquired: string;
-};
+import Navbar from '../shared/Navbar';
+import { TDeck } from '../shared/TDeck';
+import CardInfo from '../shared/CardInfo';
 
 function App() {
     const [cards, setCards] = useState<TDeck[]>([]);
@@ -31,14 +20,17 @@ function App() {
 
     return (
         <div className="App h-full">
-            <ul className="cards py-5 flex gap-8 ml-5 flex-wrap">
+            <Navbar />
+            <ul className="cards mt-8 mb-8 flex gap-8 ml-12 flex-wrap">
                 {cards.map((card) => (
                     <li
-                        className="rounded-md h-36 w-36 bg-blue-300 flex items-center justify-center"
                         // eslint-disable-next-line no-underscore-dangle
                         key={card._id}
                     >
-                        {card.playerName}
+                        <CardInfo
+                            frontCardImage={`${card.frontCardImage}`}
+                            playername={`${card.playerName}`}
+                        />
                     </li>
                 ))}
             </ul>

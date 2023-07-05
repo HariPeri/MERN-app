@@ -23,7 +23,9 @@ export default {
       }),
       fontFamily: {
         dmsans: ['DM Sans', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif']
+        montserrat: ['Montserrat', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif']
       },
       content: {
         evolvetext: "url('./assets/EvolveText.png')",
