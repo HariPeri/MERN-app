@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 // const ObjectID = mongoose.Types.ObjectID
@@ -13,9 +13,9 @@ const Card = new Schema({
   color: String,
   cardNumber: String,
   cardNumberedOutOf: String,
-  dateAcquired: String
+  dateAcquired: String,
 });
 
-const MyModel = mongoose.model("Card", Card);
+const MyModel = mongoose.model("Card", Card); // First Card is way that we represent model and second card is the model we are actually referring to
 
 export default MyModel;
