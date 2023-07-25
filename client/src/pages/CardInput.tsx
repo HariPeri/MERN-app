@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState /* useEffect */ } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { MdCloudUpload } from 'react-icons/md';
@@ -21,6 +22,7 @@ function CardInput() {
     const [color, setColor] = useState('');
     const [cardNumber, setCardNumber] = useState('');
     const [cardNumberedOutOf, setCardNumberedOutof] = useState('');
+    const [players, setPlayers] = useState([]);
 
     const navigate = useNavigate();
 
@@ -47,6 +49,26 @@ function CardInput() {
             console.log('Error: ', error);
         }; */
     }
+
+    // Fetches the Players
+    useEffect(() => {
+        // Only happens on first render [empty Dependencies array]
+        async function fetchPlayers() {
+            const res = await fetch('http://localhost:3001/players');
+            const newPlayers = await res.json();
+            setPlayers(newPlayers);
+        }
+
+        fetchPlayers();
+    }, []);
+
+    // Use Effect that navigates to page when playerName changes
+    useEffect(() => {
+        // Check if the selected option should trigger navigation
+        if (playerName === 'redirect') {
+            navigate('/addPlayer');
+        }
+    }, [playerName, navigate]);
 
     const {
         register,
@@ -90,7 +112,6 @@ function CardInput() {
             });
 
             const card = await cardResponse.json();
-            // eslint-disable-next-line no-underscore-dangle
             const cardID = card._id; // Assuming the response contains the _id of the newly created card
 
             await fetch('http://localhost:3001/players', {
@@ -236,30 +257,37 @@ function CardInput() {
                         </div>
                     </div>
                     <div className="flex flex-col mb-2">
-                        <input
-                            className={inputStyles}
+                        <select
+                            className={`${inputStyles} border-r-8 border-transparent`}
                             value={playerName}
-                            type="text"
-                            placeholder="PLAYER NAME"
                             {...register('player', {
                                 required: true,
-                                maxLength: 100,
                             })}
                             onChange={(
-                                e: React.ChangeEvent<HTMLInputElement>
+                                e: React.ChangeEvent<HTMLSelectElement>
                             ) => {
                                 setPlayerName(e.target.value);
                             }}
-                        />
+                        >
+                            <option value=""> CHOOSE A PLAYER </option>
+                            {players?.map((player: any) => (
+                                <option
+                                    value={player.playerName}
+                                    key={player._id}
+                                >
+                                    {player.playerName}
+                                </option>
+                            ))}
+                            <option value="redirect">ADD A PLAYER</option>
+                        </select>
 
                         {errors.player && (
                             <p className=" text-primary-500">
                                 {errors.player.type === 'required' &&
                                     'This field is required'}
-                                {errors.player.type === 'maxLength' &&
-                                    'Max Length is 100 characters.'}
                             </p>
                         )}
+
                         <input
                             className={inputStyles}
                             value={year}

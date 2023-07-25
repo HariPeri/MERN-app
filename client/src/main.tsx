@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App';
 import './index.css';
 import CardInput from './pages/CardInput';
+import PlayerInput from './pages/PlayerInput';
 import Home from './pages/Home';
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: 'addCard',
         element: <CardInput />,
+    },
+    {
+        path: 'addPlayer',
+        element: <PlayerInput />,
     },
 ]);
 

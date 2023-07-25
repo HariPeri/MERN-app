@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
-type Props = {};
-
-function Navbar(props: Props) {
+function Navbar() {
     return (
         // div containing entire navbar (using flex for row view)
         <div className="flex h-24 bg-blue-900 text-white">

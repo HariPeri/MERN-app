@@ -29,6 +29,11 @@ app.get("/cards", async (req: Request, res: Response) => {
   res.json(cards);
 });
 
+app.get("/players", async (req: Request, res: Response) => {
+  const players = await Player.find();
+  res.json(players);
+});
+
 app.post("/cards", async (req: Request, res: Response) => {
   // post method since we are creating some sort of resource
 
