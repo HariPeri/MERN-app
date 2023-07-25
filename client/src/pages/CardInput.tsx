@@ -28,11 +28,13 @@ function CardInput() {
 
     function convertToBase64Front(e: React.ChangeEvent<HTMLInputElement>) {
         const reader = new FileReader();
-        reader.readAsDataURL(e.target.files![0]);
-        reader.onload = () => {
-            // console.log(reader.result);
-            setFrontCardImage(reader.result);
-        };
+        if (e.target.files!.length > 0) {
+            reader.readAsDataURL(e.target.files![0]);
+            reader.onload = () => {
+                // console.log(reader.result);
+                setFrontCardImage(reader.result);
+            };
+        }
         /* reader.onerror = (error) => {
             //console.log('Error: ', error);
         }; */
@@ -40,11 +42,14 @@ function CardInput() {
 
     function convertToBase64Back(e: React.ChangeEvent<HTMLInputElement>) {
         const reader = new FileReader();
-        reader.readAsDataURL(e.target.files![0]);
-        reader.onload = () => {
-            // console.log(reader.result);
-            setBackCardImage(reader.result);
-        };
+        if (e.target.files!.length > 0) {
+            reader.readAsDataURL(e.target.files![0]);
+            reader.onload = () => {
+                // console.log(reader.result);
+                setBackCardImage(reader.result);
+            };
+        }
+
         /* reader.onerror = (error) => {
             console.log('Error: ', error);
         }; */
@@ -91,7 +96,7 @@ function CardInput() {
 
             // (frontCardImage, backCardImage);
 
-            const cardResponse = await fetch('http://localhost:3001/cards', {
+            await fetch('http://localhost:3001/cards', {
                 // First arg is url and second arg is some data like what type of request and the body [must be stringified]
                 method: 'POST',
                 body: JSON.stringify({
@@ -111,20 +116,20 @@ function CardInput() {
                 },
             });
 
-            const card = await cardResponse.json();
-            const cardID = card._id; // Assuming the response contains the _id of the newly created card
+            // const card = await cardResponse.json();
+            // const cardID = card._id; // Assuming the response contains the _id of the newly created card
 
-            await fetch('http://localhost:3001/players', {
-                // First arg is url and second arg is some data like what type of request and the body [must be stringified]
-                method: 'POST',
-                body: JSON.stringify({
-                    playerName,
-                    cardID,
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            // await fetch('http://localhost:3001/players', {
+            //     // First arg is url and second arg is some data like what type of request and the body [must be stringified]
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         playerName,
+            //         cardID,
+            //     }),
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            // });
 
             navigate('/');
         }

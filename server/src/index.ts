@@ -73,7 +73,9 @@ app.post("/players", async (req: Request, res: Response) => {
   } else {
     // Step 3: Player doesn't exist, create a new player with the new cardId
     const newPlayer = new Player({
+      playerImage: req.body.playerImage,
       playerName: req.body.playerName,
+      currTeam: req.body.currTeam,
       cardID: req.body.cardID, // Assuming newCard is the newly created card document
     });
     const createdPlayer = await newPlayer.save();
