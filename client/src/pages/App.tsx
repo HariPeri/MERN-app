@@ -37,7 +37,7 @@ function App() {
             <Link to="/addCard">
                 <button
                     type="button"
-                    className="ml-10 border-black border-2 p-3 rounded-md hover:bg-gray-300 transition-all duration-500"
+                    className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
                 >
                     Add Card
                 </button>

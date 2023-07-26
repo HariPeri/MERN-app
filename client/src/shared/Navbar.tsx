@@ -18,7 +18,7 @@ function Navbar() {
                         <Link to="/collection"> Collection </Link>
                     </li>
                     <li className="hover:text-red-200 transition duration-300">
-                        Recent Additions
+                        <Link to="/recent-additions"> Recent Additions</Link>
                     </li>
                     <li className="hover:text-red-200 transition duration-300">
                         Wantlist

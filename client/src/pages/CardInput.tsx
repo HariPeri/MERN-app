@@ -396,7 +396,7 @@ function CardInput() {
 
                     <button
                         type="submit"
-                        className="w-1/2 mx-auto hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
+                        className="md:w-64 sm:w-full xs:w-full bg-white mx-auto hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
                     >
                         Create Card
                     </button>

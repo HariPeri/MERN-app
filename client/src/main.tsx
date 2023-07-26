@@ -6,6 +6,7 @@ import './index.css';
 import CardInput from './pages/CardInput';
 import PlayerInput from './pages/PlayerInput';
 import Home from './pages/Home';
+import Collection from './pages/Collection';
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     },
     {
         path: '/collection',
+        element: <Collection />,
+    },
+    {
+        path: '/recent-additions',
         element: <App />,
     },
     {

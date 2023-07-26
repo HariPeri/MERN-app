@@ -59,14 +59,17 @@ function PlayerInput() {
     return (
         <div>
             <Navbar />
-            <div className="mt-10 w-1/4 mx-auto">
+            <div className="mt-10 mx-auto">
                 {/* Header DIV */}
                 <div className="text-center mb-10">
                     <HText> Add a New Player </HText>
                 </div>
-                <form onSubmit={handleCreatePlayer}>
-                    <div className="md:grid grid-cols-2 gap-4">
-                        <div className="relative h-64 mb-2 rounded-lg bg-blue-400">
+                <form
+                    onSubmit={handleCreatePlayer}
+                    className="flex flex-col justify-center"
+                >
+                    <div className="flex flex-col justify-center mx-auto">
+                        <div className="relative h-96 w-96 mb-2 rounded-lg bg-blue-400 mx-auto">
                             <input
                                 className="absolute opacity-0 h-full w-full z-[1] cursor-pointer"
                                 type="file"
@@ -89,9 +92,8 @@ function PlayerInput() {
                                 )}
                                 {playerImage ? (
                                     <img
-                                        className="absolute top-4"
-                                        width={160}
-                                        height={350}
+                                        className="absolute top-16"
+                                        height={200}
                                         src={playerImage}
                                         alt={playerImage}
                                     />
@@ -108,7 +110,7 @@ function PlayerInput() {
                             </p>
                         )}
 
-                        <div className="w-full">
+                        <div className="flex justify-between gap-4">
                             <input
                                 className={inputStyles}
                                 value={playerName}
@@ -162,9 +164,9 @@ function PlayerInput() {
                     </div>
                     <button
                         type="submit"
-                        className="w-1/2 mx-auto hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
+                        className="w-64 mx-auto bg-white hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
                     >
-                        Create Card
+                        Add Player
                     </button>
                 </form>
             </div>
