@@ -96,7 +96,7 @@ function CardInput() {
 
             // (frontCardImage, backCardImage);
 
-            await fetch('http://localhost:3001/cards', {
+            const cardResponse = await fetch('http://localhost:3001/cards', {
                 // First arg is url and second arg is some data like what type of request and the body [must be stringified]
                 method: 'POST',
                 body: JSON.stringify({
@@ -116,20 +116,20 @@ function CardInput() {
                 },
             });
 
-            // const card = await cardResponse.json();
-            // const cardID = card._id; // Assuming the response contains the _id of the newly created card
+            const card = await cardResponse.json();
+            const cardID = card._id; // Assuming the response contains the _id of the newly created card
 
-            // await fetch('http://localhost:3001/players', {
-            //     // First arg is url and second arg is some data like what type of request and the body [must be stringified]
-            //     method: 'POST',
-            //     body: JSON.stringify({
-            //         playerName,
-            //         cardID,
-            //     }),
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            // });
+            await fetch('http://localhost:3001/players', {
+                // First arg is url and second arg is some data like what type of request and the body [must be stringified]
+                method: 'POST',
+                body: JSON.stringify({
+                    playerName,
+                    cardID,
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
             navigate('/');
         }

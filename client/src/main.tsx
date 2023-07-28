@@ -7,6 +7,7 @@ import CardInput from './pages/CardInput';
 import PlayerInput from './pages/PlayerInput';
 import Home from './pages/Home';
 import Collection from './pages/Collection';
+import PlayerCards from './pages/PlayerCards';
 
 const router = createBrowserRouter([
     {
@@ -22,12 +23,16 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: 'addCard',
+        path: '/addCard',
         element: <CardInput />,
     },
     {
-        path: 'addPlayer',
+        path: '/addPlayer',
         element: <PlayerInput />,
+    },
+    {
+        path: '/cards/:id',
+        element: <PlayerCards />,
     },
 ]);
 

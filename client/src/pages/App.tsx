@@ -10,7 +10,7 @@ function App() {
     useEffect(() => {
         // Only happens on first render [empty Dependencies array]
         async function fetchCards() {
-            const res = await fetch('http://localhost:3001/cards');
+            const res = await fetch(`http://localhost:3001/cards`);
             const newCards = await res.json();
             setCards(newCards);
         }

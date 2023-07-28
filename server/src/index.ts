@@ -4,7 +4,7 @@ config();
 import cors from "cors";
 
 import express, { Request, Response } from "express"; // Importing function from express package as well as Request and Response
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import Card from "./Models/Card";
 import Player from "./Models/Player";
 
@@ -29,9 +29,42 @@ app.get("/cards", async (req: Request, res: Response) => {
   res.json(cards);
 });
 
+app.get("/cards/:playerID", async (req: Request, res: Response) => {
+  const playerID = req.params.playerID;
+  const selectedPlayer = await Player.find({ _id: playerID });
+  if (!selectedPlayer) {
+    return res.status(404).json({ message: "Player not found" });
+  }
+  console.log("Raw Data: ", selectedPlayer);
+  // Get the cardIDs associated with the player
+  const cardIDs = selectedPlayer[0].cardID;
+
+  console.log("Extracted IDs: ", cardIDs);
+
+  // Find all the cards whose _id matches any value in the cardIDs array
+  const cards = await Card.find({ _id: { $in: cardIDs } });
+
+  console.log("Card Data: ", cards);
+
+  // If no cards are found for the player, return an empty array
+  if (!cards || cards.length === 0) {
+    return res.json([]);
+  }
+
+  // Return the cards associated with the player as JSON
+  res.json(cards);
+});
+
 app.get("/players", async (req: Request, res: Response) => {
   const players = await Player.find();
   res.json(players);
+});
+
+app.get("/", async (req: Request, res: Response) => {
+  const cardID = req.params.cardID;
+  console.log(cardID);
+  const card = await Card.find({ _id: cardID });
+  res.json(card);
 });
 
 app.post("/cards", async (req: Request, res: Response) => {
