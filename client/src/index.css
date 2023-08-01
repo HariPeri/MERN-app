@@ -1,8 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&display=swap');  /* import fonts from google fonts website */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Montserrat:wght@700&display=swap'); /* import fonts from google fonts website */
 
 @tailwind base; /* Explanations below */
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .blinking-cursor:after {
+        content: '|';
+        @apply text-blue-200;
+        animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+}
 
 /*
 @tailwind base;: This directive includes the base styles provided by Tailwind CSS. 
@@ -18,10 +32,11 @@ Examples of utility classes include margin, padding, text color, background colo
 html, /* css selectors but because they are separated by commas, everything in the .app will be applied to the html and body tags, as well as everything with an id of root [id = #] */
 body,
 #root,
-.app{ /* Default Set up */ 
+.app {
+    /* Default Set up */
     height: 100%; /* set height and width to 100% of parent container */
     width: 100%;
-    font-family: "DM Sans", sans-serif; /*sets font to DM Sans but if not available then it will fall onto the default sans-serif */
-    @apply text-blue-700;  /* @apply sets the default text color to gray-500, which is in our tailwind.config.js file */
-    @apply bg-black
+    font-family: 'DM Sans', sans-serif; /*sets font to DM Sans but if not available then it will fall onto the default sans-serif */
+    @apply text-blue-700; /* @apply sets the default text color to gray-500, which is in our tailwind.config.js file */
+    @apply bg-black;
 }

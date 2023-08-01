@@ -83,7 +83,7 @@ function PlayerCards() {
         <div className="relative">
             <Navbar />
             {/* Render filter options as checkboxes */}
-            <div className="absolute right-0 w-[200px] ml-auto mt-8 mr-10">
+            <div className="absolute right-0 w-[200px] ml-auto mt-8 mr-10 z-[1]">
                 <button
                     type="button"
                     className="cursor-pointer flex items-center text-white"
@@ -93,8 +93,18 @@ function PlayerCards() {
                     <BsFilter />
                 </button>
                 {isFilterOpen && (
-                    <div>
-                        <div className="bg-red-200 w-200">
+                    <motion.div
+                        className="z-[-1]"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.5 }}
+                        variants={{
+                            hidden: { opacity: 0, y: -25 },
+                            visible: { opacity: 1, y: 0 },
+                        }}
+                    >
+                        <div className="bg-blue-200">
                             {filterOptions.map((option) => (
                                 <label
                                     key={option.value}
@@ -131,7 +141,7 @@ function PlayerCards() {
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </div>
 

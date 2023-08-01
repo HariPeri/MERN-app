@@ -7,7 +7,7 @@ export type TDeck = {
     cardSet: string;
     cardType: string;
     color: string;
-    cardNumber: string;
-    cardNumberedOutOf: string;
-    dateAcquired: string;
+    cardNumber?: string;
+    cardNumberedOutOf?: string;
+    dateAcquired?: string;
 };

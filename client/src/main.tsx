@@ -5,7 +5,7 @@ import App from './pages/App';
 import './index.css';
 import CardInput from './pages/CardInput';
 import PlayerInput from './pages/PlayerInput';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Collection from './pages/Collection';
 import PlayerCards from './pages/PlayerCards';
 
