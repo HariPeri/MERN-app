@@ -1,4 +1,4 @@
-import { THomeCard } from './THomeCard';
+import { THomeCard } from './HomeTypes/THomeCard';
 
 const homeCards: THomeCard[] = [
     {

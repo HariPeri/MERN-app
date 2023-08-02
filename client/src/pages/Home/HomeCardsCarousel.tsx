@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import homeCards from './HomeCards';
-import { THomeCard } from './THomeCard';
+import { THomeCard } from './HomeTypes/THomeCard';
 
 function HomeCardsCarousel() {
     const carouselLength = homeCards.length;
@@ -10,17 +10,20 @@ function HomeCardsCarousel() {
         Math.floor(carouselLength / 2)
     );
 
-    const handlePrevClick = () => {
-        setActiveIndex(
-            (prevIndex) => (prevIndex - 1 + carouselLength) % carouselLength
-        );
-        console.log('New Active Index after prev: ', activeIndex);
-    };
+    const intervalDuration = 3000; // 5 seconds, for example
 
-    const handleNextClick = () => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % carouselLength);
-        console.log('New Active Index next:', activeIndex);
-    };
+    useEffect(() => {
+        // Function to handle automatic card switching
+        const autoSwitchCards = () => {
+            setActiveIndex((prevIndex) => (prevIndex + 1) % carouselLength);
+        };
+
+        // Set up the interval
+        const intervalId = setInterval(autoSwitchCards, intervalDuration);
+
+        // Clean up the interval when the component unmounts
+        return () => clearInterval(intervalId);
+    }, [carouselLength]);
 
     const displayedCards = [-1, 0, 1].map((offset) => {
         const index = (activeIndex + offset + carouselLength) % carouselLength;
@@ -34,7 +37,9 @@ function HomeCardsCarousel() {
                     <div
                         key={card._id}
                         className={`flex-shrink-0 border border-gray-300 rounded-lg shadow-lg ${
-                            index === 1 ? 'transition scale-110' : 'scale-75'
+                            index === 1
+                                ? 'transition scale-110 hover:scale-125'
+                                : 'scale-75'
                         } ${index === 0 ? '-rotate-12' : ''} ${
                             index === 2 ? 'rotate-12' : ''
                         } ${index !== 1 ? 'mx-12 opacity-50' : ''}`}
@@ -47,20 +52,6 @@ function HomeCardsCarousel() {
                     </div>
                 ))}
             </div>
-            <button
-                type="button"
-                className="absolute top-1/2 left-0 transform -translate-y-1/2 px-2 py-1 bg-gray-900 text-white rounded-l-lg"
-                onClick={handlePrevClick}
-            >
-                Prev
-            </button>
-            <button
-                type="button"
-                className="absolute top-1/2 right-0 transform -translate-y-1/2 px-2 py-1 bg-gray-900 text-white rounded-r-lg"
-                onClick={handleNextClick}
-            >
-                Next
-            </button>
         </div>
     );
 }

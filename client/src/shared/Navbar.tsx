@@ -28,7 +28,7 @@ function Navbar() {
                     </li>
                 </ul>
                 <button
-                    className="rounded-md bg-orange-500 px-4 py-3 transition duration-300 hover:bg-orange-700 hover:text-white mr-12"
+                    className="rounded-md bg-union-gold px-4 py-3 transition duration-300 hover:bg-orange-700 hover:text-white mr-12"
                     type="button"
                 >
                     Contact Me!
