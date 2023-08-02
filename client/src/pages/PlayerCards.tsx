@@ -22,6 +22,7 @@ function PlayerCards() {
         ],
         []
     );
+
     const { id } = useParams(); // destructures out the id using the useParams hook [path -> cards/:id]
     const [cards, setCards] = useState<TDeck[]>([]); // useState to hold the statae of all cards
     const [filteredCards, setFilteredCards] = useState<TDeck[]>([]);
@@ -66,6 +67,8 @@ function PlayerCards() {
                 cards.filter((card) => selectedFilters.includes(card.cardType))
             );
         }
+
+        setIsFilterOpen(!isFilterOpen);
     };
 
     useEffect(() => {
@@ -114,7 +117,7 @@ function PlayerCards() {
                                     <input
                                         type="checkbox"
                                         id={`filter_${option.value}`}
-                                        className="form-checkbox h-4 w-4 text-blue-500"
+                                        className="h-4 w-4 text-blue-500"
                                         checked={selectedFilters.includes(
                                             option.value
                                         )}

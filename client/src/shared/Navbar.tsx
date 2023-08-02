@@ -1,6 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { kebabCase } from 'lodash';
 
 function Navbar() {
+    // storing current location path
+    const location = useLocation();
+
+    // function that takes in heading
+    const isHeadingActive = (heading: string) => {
+        const convHeading = kebabCase(heading); // converts heading text to lowercase & adds hyphens in spaces
+        const parts = location.pathname.split('/'); // splits the pathname tring wherever a / is detected
+        const activeHeading = parts[1]; // accesses the heading portion of the address
+        return convHeading === activeHeading; // returns true or false depending on if on that specific heading page
+    };
+
+    // styling for different components
+    const linkStyles = 'hover:text-red-200 transition duration-300 p-4'; // navbar menu items when hovered
+
     return (
         // div containing entire navbar (using flex for row view)
         <div className="flex h-24 bg-blue-900 text-white">
@@ -15,10 +30,28 @@ function Navbar() {
                 <ul className="flex gap-16 mr-12">
                     {/* changing hover text color with a transition time of 300ms */}
                     <li className="hover:text-red-200 transition duration-300">
-                        <Link to="/collection"> Collection </Link>
+                        <Link
+                            className={`${linkStyles} ${
+                                isHeadingActive('Collection')
+                                    ? 'text-red-300'
+                                    : ''
+                            } `}
+                            to="/collection"
+                        >
+                            Collection
+                        </Link>
                     </li>
                     <li className="hover:text-red-200 transition duration-300">
-                        <Link to="/recent-additions"> Recent Additions</Link>
+                        <Link
+                            className={`${linkStyles} ${
+                                isHeadingActive('Recent Additions')
+                                    ? 'text-red-300'
+                                    : ''
+                            } `}
+                            to="/recent-additions"
+                        >
+                            Recent Additions
+                        </Link>
                     </li>
                     <li className="hover:text-red-200 transition duration-300">
                         Wantlist
