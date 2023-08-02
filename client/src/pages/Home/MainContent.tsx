@@ -3,9 +3,7 @@ import HomeCardsCarousel from './HomeCardsCarousel';
 import Navbar from '../../shared/Navbar';
 import CollectionTyping from './CollectionTyping';
 import SoccerParticlesBackground from './SoccerParticlesBackground';
-import Carranza from '../../assets/Carranza-removebg-preview.png';
-import Bedoya from '../../assets/Bedoya-removebg-preview.png';
-import Santos from '../../assets/SergioSantos-removebg-preview.png';
+import HomeGraphic from '../../assets/HomeGraphic.png';
 
 const triangleWidth = 50;
 
@@ -47,19 +45,9 @@ function MainContent() {
                 <div className="grid grid-cols-2">
                     <div className="relative flex justify-center ml-6 mb-96">
                         <img
-                            className="absolute left-0 ml-10"
-                            src={Carranza}
-                            alt="Carranza.png"
-                        />
-                        <img
-                            className="absolute right-0 mr-8 top-0 mt-4 scale-x-[-1]"
-                            src={Santos}
-                            alt="SergioSantos.png"
-                        />
-                        <img
-                            className="absolute w-full"
-                            src={Bedoya}
-                            alt="Bedoya.png"
+                            src={HomeGraphic}
+                            alt="HomeGraphic.png"
+                            width="700"
                         />
                     </div>
                     <div className=" flex justify-center items-center mb-96 text-union-blue">
