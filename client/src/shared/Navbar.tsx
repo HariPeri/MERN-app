@@ -67,12 +67,23 @@ function Navbar() {
                         </div>
                     </li>
                 </ul>
-                <button
-                    className="rounded-md bg-union-gold px-4 py-3 transition duration-300 hover:bg-orange-700 hover:text-white mr-12"
-                    type="button"
-                >
-                    Contact Me!
-                </button>
+                <div className="flex">
+                    <button
+                        className="rounded-md bg-union-gold px-4 py-3 my-7 transition duration-300 hover:bg-orange-700 hover:text-white mr-8"
+                        type="button"
+                    >
+                        Contact Me!
+                    </button>
+                    <div className="mr-4 mt-4">
+                        <Link to="/login">
+                            <div>Login</div>
+                        </Link>
+                        ------
+                        <Link to="/signup">
+                            <div>Sign up</div>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

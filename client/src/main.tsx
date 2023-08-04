@@ -9,6 +9,8 @@ import Home from './pages/Home/Home';
 import Collection from './pages/Collection';
 import PlayerCards from './pages/PlayerCards';
 import { AuthContextProvider } from './context/AuthContext';
+import Login from './pages/Auth/Login';
+import SignUp from './pages/Auth/SignUp';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
     {
         path: '/cards/:id',
         element: <PlayerCards />,
+    },
+    {
+        path: '/login',
+        element: <Login />,
+    },
+    {
+        path: '/signup',
+        element: <SignUp />,
     },
 ]);
 
