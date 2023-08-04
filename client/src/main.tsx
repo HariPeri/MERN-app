@@ -8,6 +8,7 @@ import PlayerInput from './pages/PlayerInput';
 import Home from './pages/Home/Home';
 import Collection from './pages/Collection';
 import PlayerCards from './pages/PlayerCards';
+import { AuthContextProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthContextProvider>
+            <RouterProvider router={router} />
+        </AuthContextProvider>
     </React.StrictMode>
 );

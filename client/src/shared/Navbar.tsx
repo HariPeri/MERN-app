@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { kebabCase } from 'lodash';
+import ComingSoon from '../assets/ComingSoonDownloaded-removebg-preview.png';
 
 function Navbar() {
     // storing current location path
@@ -29,7 +30,7 @@ function Navbar() {
                 {/* List of headers (flex for row view, gap between list items with margin on right) */}
                 <ul className="flex gap-16 mr-12">
                     {/* changing hover text color with a transition time of 300ms */}
-                    <li className="hover:text-red-200 transition duration-300">
+                    <li>
                         <Link
                             className={`${linkStyles} ${
                                 isHeadingActive('Collection')
@@ -41,7 +42,7 @@ function Navbar() {
                             Collection
                         </Link>
                     </li>
-                    <li className="hover:text-red-200 transition duration-300">
+                    <li>
                         <Link
                             className={`${linkStyles} ${
                                 isHeadingActive('Recent Additions')
@@ -53,11 +54,17 @@ function Navbar() {
                             Recent Additions
                         </Link>
                     </li>
-                    <li className="hover:text-red-200 transition duration-300">
+                    <li className="relative ">
                         Wantlist
+                        <div className="absolute left-0 -top-6 -rotate-12 h-[100px] w-[100px]  ">
+                            <img src={ComingSoon} alt="ComingSoon.png" />
+                        </div>
                     </li>
-                    <li className="hover:text-red-200 transition duration-300">
+                    <li className="relative ">
                         Tradelist
+                        <div className="absolute left-0 -top-6 -rotate-12 h-[100px] w-[100px]  ">
+                            <img src={ComingSoon} alt="ComingSoon.png" />
+                        </div>
                     </li>
                 </ul>
                 <button

@@ -7,6 +7,7 @@ import express, { Request, Response } from "express"; // Importing function from
 import mongoose, { ObjectId } from "mongoose";
 import Card from "./Models/Card";
 import Player from "./Models/Player";
+import userRoutes from "./routes/user";
 
 const app = express(); // When we call the function, we get back this app
 const PORT = 3001; // Good to always make your ports as constant var
@@ -17,6 +18,7 @@ app.use(
     origin: "*",
   })
 );
+app.use("/api/user", userRoutes); // Registers the routes
 
 /*****************GET REQUESTS*****************/
 

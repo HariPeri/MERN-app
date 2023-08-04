@@ -5,10 +5,7 @@ import CollectionTyping from './CollectionTyping';
 import SoccerParticlesBackground from './SoccerParticlesBackground';
 import HomeGraphic from '../../assets/HomeGraphic.png';
 
-const triangleWidth = 50;
-
 function MainContent() {
-    const side = 10;
     return (
         <>
             <SoccerParticlesBackground />
@@ -18,13 +15,9 @@ function MainContent() {
                     <div className="relative py-8 w-[800px] rounded-xl bg-union-gold mx-auto shadow-xl ">
                         Collection Showcase
                         {/* Bottom Left Triangle */}
-                        <div
-                            className={`absolute bottom-0 left-0 border-b-[${triangleWidth}px] border-b-solid border-r-transparent border-r-[${triangleWidth}px] border-union-blue`}
-                        />
+                        <div className="absolute bottom-0 left-0 border-b-[60px] border-b-solid border-r-transparent border-r-[60px] border-union-blue" />
                         {/* Top Right Triangle */}
-                        <div
-                            className={`absolute top-0 right-0 h-${side} w-${side} border-b-[${triangleWidth}px] border-b-transparent border-r-solid border-r-[${triangleWidth}px] border-union-blue`}
-                        />
+                        <div className="absolute top-0 right-0 border-b-[60px] border-b-transparent border-r-solid border-r-[60px] border-union-blue" />
                     </div>
                     <div className="mt-24 text-lg">
                         <HomeCardsCarousel />
@@ -43,7 +36,7 @@ function MainContent() {
                 </div>
 
                 <div className="grid grid-cols-2">
-                    <div className="relative flex justify-center ml-6 mb-96">
+                    <div className="relative flex justify-center ml-6 mb-96 bg-union-blue rounded-full">
                         <img
                             src={HomeGraphic}
                             alt="HomeGraphic.png"
