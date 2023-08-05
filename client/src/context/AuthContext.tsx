@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createContext, useReducer, Dispatch, useMemo } from 'react';
+import { createContext, useReducer, Dispatch, useMemo, useEffect } from 'react';
 
 // Define the types
 type User = {
     email: string;
-    password: string;
+    token: string;
 };
 
 type AuthState = {
@@ -45,9 +45,20 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         user: null,
     });
 
-    console.log('Auth Context state: ', state);
+    useEffect(() => {
+        // use a TypeGuard
+        const userJson = localStorage.getItem('user');
+
+        const user = userJson ? JSON.parse(userJson) : null;
+
+        if (user) {
+            dispatch({ type: 'LOGIN', payload: user });
+        }
+    }, []);
 
     const contextValue = useMemo(() => ({ state, dispatch }), [state]);
+
+    console.log('Auth Context state: ', state);
 
     return (
         <AuthContext.Provider value={contextValue}>

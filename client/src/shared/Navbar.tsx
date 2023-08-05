@@ -1,10 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { kebabCase } from 'lodash';
 import ComingSoon from '../assets/ComingSoonDownloaded-removebg-preview.png';
+import useLogout from '../hooks/useLogout';
+import useAuthContext from '../hooks/useAuthContext';
 
 function Navbar() {
     // storing current location path
     const location = useLocation();
+
+    const { logout } = useLogout();
+
+    const {
+        state: { user },
+    } = useAuthContext();
 
     // function that takes in heading
     const isHeadingActive = (heading: string) => {
@@ -16,6 +24,10 @@ function Navbar() {
 
     // styling for different components
     const linkStyles = 'hover:text-red-200 transition duration-300 p-4'; // navbar menu items when hovered
+
+    const handleClick = () => {
+        logout();
+    };
 
     return (
         // div containing entire navbar (using flex for row view)
@@ -74,15 +86,28 @@ function Navbar() {
                     >
                         Contact Me!
                     </button>
-                    <div className="mr-4 mt-4">
-                        <Link to="/login">
-                            <div>Login</div>
-                        </Link>
-                        ------
-                        <Link to="/signup">
-                            <div>Sign up</div>
-                        </Link>
-                    </div>
+                    {!user && (
+                        <div className="mr-4 mt-4">
+                            <Link to="/login">
+                                <div>Login</div>
+                            </Link>
+                            ------
+                            <Link to="/signup">
+                                <div>Sign up</div>
+                            </Link>
+                        </div>
+                    )}
+                    {user && (
+                        <div className="w-[150px] flex flex-col mt-4 mr-6 text-md">
+                            <div className="text-xs text-center">
+                                {user.email}
+                            </div>
+                            <div> ---------------- </div>
+                            <button type="button" onClick={handleClick}>
+                                Log Out
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

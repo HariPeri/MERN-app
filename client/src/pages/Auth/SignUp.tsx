@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import Navbar from '../../shared/Navbar';
+import useSignUp from '../../hooks/useSignUp';
 
 function SignUp() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const { signup, error, isLoading } = useSignUp();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log(email, password);
+        await signup(email, password);
     };
     return (
         <div className="bg-blue-200 h-full text-black">
@@ -52,10 +54,16 @@ function SignUp() {
                     <div className="flex flex-col">
                         <button
                             type="submit"
+                            disabled={isLoading}
                             className="mt-10 bg-blue-400 w-[125px] h-[50px] mx-auto rounded-xl text-white"
                         >
                             Sign Up
                         </button>
+                        {error && (
+                            <div className="ml-4 mt-4 text-red-400 w-[29rem] rounded-md p-4 text-xl bg-red-100 border-2 border-red-400">
+                                {error}
+                            </div>
+                        )}
                     </div>
                 </form>
             </div>
