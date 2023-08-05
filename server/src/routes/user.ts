@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"; // Importing function from express package as well as Request and Response
+import express from "express"; // Importing function from express package as well as Request and Response
 import { loginUser, signupUser } from "../controllers/userController";
 
 const router = express.Router();

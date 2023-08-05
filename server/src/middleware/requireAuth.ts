@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../Models/User";
 import mongoose from "mongoose";
@@ -8,11 +8,10 @@ interface JwtPayload {
 }
 
 export interface AuthRequest extends Request {
-  email: string;
-  password: string;
   user?: mongoose.Types.ObjectId;
 }
-const requireAuth = async (
+
+const requireAuth: RequestHandler = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
@@ -28,9 +27,6 @@ const requireAuth = async (
   // Grabs the token
   const token = authorization.split(" ")[1];
 
-  // verify the token to make sure that it wasn't tampered with
-  jwt.verify(token, process.env.SECRET!);
-
   try {
     // verify the token to make sure that it wasn't tampered with
     const { _id } = jwt.verify(token, process.env.SECRET!) as JwtPayload;
@@ -44,7 +40,18 @@ const requireAuth = async (
     req.user = user._id;
     next();
   } catch (error: any) {
-    console.log(error);
-    res.status(401).json({ error: "Request is not authorized" });
+    if (error.name === "JsonWebTokenError") {
+      // Token is malformed or invalid
+      return res.status(401).json({ error: "Invalid token" });
+    } else if (error.name === "TokenExpiredError") {
+      // Token has expired
+      return res.status(401).json({ error: "Token has expired" });
+    } else {
+      // Other error (e.g., jwt.verify failed)
+      console.error(error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
   }
 };
+
+export default requireAuth;

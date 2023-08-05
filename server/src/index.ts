@@ -8,6 +8,7 @@ import mongoose, { ObjectId } from "mongoose";
 import Card from "./Models/Card";
 import Player from "./Models/Player";
 import userRoutes from "./routes/user";
+import requireAuth from "./middleware/requireAuth";
 
 const app = express(); // When we call the function, we get back this app
 const PORT = 3001; // Good to always make your ports as constant var
@@ -21,10 +22,6 @@ app.use(
 app.use("/api/user", userRoutes); // Registers the routes
 
 /*****************GET REQUESTS*****************/
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("hello word");
-});
 
 app.get("/cards", async (req: Request, res: Response) => {
   const cards = await Card.find();
@@ -62,14 +59,14 @@ app.get("/players", async (req: Request, res: Response) => {
   res.json(players);
 });
 
-app.get("/", async (req: Request, res: Response) => {
-  const cardID = req.params.cardID;
-  console.log(cardID);
-  const card = await Card.find({ _id: cardID });
-  res.json(card);
-});
+// app.get("/", async (req: Request, res: Response) => {
+//   const cardID = req.params.cardID;
+//   console.log(cardID);
+//   const card = await Card.find({ _id: cardID });
+//   res.json(card);
+// });
 
-app.post("/cards", async (req: Request, res: Response) => {
+app.post("/cards", requireAuth, async (req: Request, res: Response) => {
   // post method since we are creating some sort of resource
 
   const newCard = new Card({
@@ -91,7 +88,7 @@ app.post("/cards", async (req: Request, res: Response) => {
   res.json(createdCard);
 });
 
-app.post("/players", async (req: Request, res: Response) => {
+app.post("/players", requireAuth, async (req: Request, res: Response) => {
   // post method since we are creating some sort of resource
 
   const existingPlayer = await Player.findOne({
