@@ -8,8 +8,24 @@ import Navbar from '../shared/Navbar';
 import CardInfo from '../shared/CardInfo';
 import { TDeck } from '../shared/TDeck';
 import { FilterOption } from '../shared/types';
+import useAuthContext from '../hooks/useAuthContext';
 
 function PlayerCards() {
+    const [showAddCard, setShowAddCard] = useState<boolean>(false);
+
+    const personalEmail = import.meta.env.VITE_REACT_APP_PERSONAL_EMAIL;
+
+    const {
+        state: { user },
+    } = useAuthContext();
+
+    const userEmail = user?.email;
+
+    useEffect(() => {
+        if (userEmail === personalEmail) {
+            setShowAddCard(true);
+        } else setShowAddCard(false);
+    }, [userEmail, personalEmail]);
     // Prevents continuous rendering since filterOptions is a dependency of the useEffect hook
     const filterOptions = useMemo<FilterOption[]>(
         () => [
@@ -169,14 +185,16 @@ function PlayerCards() {
                     ))
                 )}
             </ul>
-            <Link to="/addCard">
-                <button
-                    type="button"
-                    className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
-                >
-                    Add Card
-                </button>
-            </Link>
+            {showAddCard && (
+                <Link to="/addCard">
+                    <button
+                        type="button"
+                        className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
+                    >
+                        Add Card
+                    </button>
+                </Link>
+            )}
         </div>
     );
 }

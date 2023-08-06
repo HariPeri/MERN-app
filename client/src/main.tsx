@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import App from './pages/App';
 import './index.css';
 import CardInput from './pages/CardInput';
 import PlayerInput from './pages/PlayerInput';
@@ -11,6 +10,7 @@ import PlayerCards from './pages/PlayerCards';
 import { AuthContextProvider } from './context/AuthContext';
 import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
+import RecentAdditions from './pages/RecentAdditions';
 
 const router = createBrowserRouter([
     {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/recent-additions',
-        element: <App />,
+        element: <RecentAdditions />,
     },
     {
         path: '/addCard',

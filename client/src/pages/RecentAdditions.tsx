@@ -3,9 +3,25 @@ import { Link } from 'react-router-dom';
 import Navbar from '../shared/Navbar';
 import { TDeck } from '../shared/TDeck';
 import CardInfo from '../shared/CardInfo';
+import useAuthContext from '../hooks/useAuthContext';
 
-function App() {
+function RecentAdditions() {
     const [cards, setCards] = useState<TDeck[]>([]);
+    const [showAddCard, setShowAddCard] = useState<boolean>(false);
+
+    const personalEmail = import.meta.env.VITE_REACT_APP_PERSONAL_EMAIL;
+
+    const {
+        state: { user },
+    } = useAuthContext();
+
+    const userEmail = user?.email;
+
+    useEffect(() => {
+        if (userEmail === personalEmail) {
+            setShowAddCard(true);
+        } else setShowAddCard(false);
+    }, [userEmail, personalEmail]);
 
     useEffect(() => {
         // Only happens on first render [empty Dependencies array]
@@ -34,16 +50,18 @@ function App() {
                     </li>
                 ))}
             </ul>
-            <Link to="/addCard">
-                <button
-                    type="button"
-                    className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
-                >
-                    Add Card
-                </button>
-            </Link>
+            {showAddCard && (
+                <Link to="/addCard">
+                    <button
+                        type="button"
+                        className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
+                    >
+                        Add Card
+                    </button>
+                </Link>
+            )}
         </div>
     );
 }
 
-export default App;
+export default RecentAdditions;
