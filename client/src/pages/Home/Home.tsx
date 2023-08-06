@@ -1,6 +1,10 @@
 import MainContent from './MainContent';
 
 function Home() {
-    return <MainContent />;
+    return (
+        <div>
+            <MainContent />
+        </div>
+    );
 }
 export default Home;

@@ -26,11 +26,11 @@ const router = createBrowserRouter([
         element: <RecentAdditions />,
     },
     {
-        path: '/addCard',
+        path: '/add-card',
         element: <CardInput />,
     },
     {
-        path: '/addPlayer',
+        path: '/add-player',
         element: <PlayerInput />,
     },
     {

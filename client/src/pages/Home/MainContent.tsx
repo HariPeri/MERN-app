@@ -4,6 +4,7 @@ import Navbar from '../../shared/Navbar';
 import CollectionTyping from './CollectionTyping';
 import SoccerParticlesBackground from './SoccerParticlesBackground';
 import HomeGraphic from '../../assets/HomeGraphic.png';
+import Footer from '../../shared/Footer';
 
 function MainContent() {
     return (
@@ -35,15 +36,15 @@ function MainContent() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2">
-                    <div className="relative flex justify-center ml-6 mb-96 bg-union-blue rounded-full">
+                <div className="md:grid grid-cols-2">
+                    <div className="relative flex justify-center ml-6 mb-48 bg-union-blue rounded-full">
                         <img
                             src={HomeGraphic}
                             alt="HomeGraphic.png"
                             width="700"
                         />
                     </div>
-                    <div className=" flex justify-center items-center mb-96 text-union-blue">
+                    <div className=" flex justify-center items-center mb-48 text-union-blue">
                         <div className="h-96 w-96 rounded-xl bg-union-gold text-2xl">
                             <div className="font-bold ml-8 mt-16 w-3/4">
                                 Join me on my collecting journey! Check out some
@@ -62,6 +63,7 @@ function MainContent() {
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         </>
     );

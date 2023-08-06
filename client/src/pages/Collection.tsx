@@ -7,6 +7,7 @@ import Navbar from '../shared/Navbar';
 import { TPlayer } from '../shared/TPlayer';
 import PlayerInfo from '../shared/PlayerInfo';
 import PlayerInfoLoader from '../shared/Skeleton Loaders/PlayerInfoLoader';
+import Footer from '../shared/Footer';
 
 function Collection() {
     const [players, setPlayers] = useState<TPlayer[]>([]);
@@ -29,7 +30,7 @@ function Collection() {
         <div>
             <Navbar />
             {!isLoading ? (
-                <ul className="mt-8 mb-8 flex gap-8 ml-12 flex-wrap">
+                <ul className="mt-8 mb-96 flex gap-8 ml-12 flex-wrap">
                     {players.map((player: TPlayer) => (
                         <li key={player._id}>
                             <Link to={`/cards/${player._id}`}>
@@ -39,12 +40,14 @@ function Collection() {
                     ))}
                 </ul>
             ) : (
-                <div className="mt-8 mb-8 flex gap-8 ml-12 flex-wrap">
-                    {[...Array(8)].map((_, index) => (
+                <div className="mt-8 mb-96 flex gap-8 ml-12 flex-wrap">
+                    {[...Array(10)].map((_, index) => (
                         <PlayerInfoLoader key={`${index}-${Date.now()}`} />
                     ))}
                 </div>
             )}
+
+            <Footer />
         </div>
     );
 }

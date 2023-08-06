@@ -4,6 +4,7 @@ import Navbar from '../shared/Navbar';
 import { TDeck } from '../shared/TDeck';
 import CardInfo from '../shared/CardInfo';
 import useAuthContext from '../hooks/useAuthContext';
+import Footer from '../shared/Footer';
 
 function RecentAdditions() {
     const [cards, setCards] = useState<TDeck[]>([]);
@@ -23,6 +24,10 @@ function RecentAdditions() {
         } else setShowAddCard(false);
     }, [userEmail, personalEmail]);
 
+    const cardStyles = showAddCard
+        ? 'mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+        : ' mt-16 mb-64 flex gap-8 ml-12 flex-wrap text-white font-xl italic';
+
     useEffect(() => {
         // Only happens on first render [empty Dependencies array]
         async function fetchCards() {
@@ -37,7 +42,7 @@ function RecentAdditions() {
     return (
         <div className="App h-full">
             <Navbar />
-            <ul className="cards mt-8 mb-8 flex gap-8 ml-12 flex-wrap">
+            <ul className={cardStyles}>
                 {cards.map((card) => (
                     <li
                         // eslint-disable-next-line no-underscore-dangle
@@ -51,15 +56,16 @@ function RecentAdditions() {
                 ))}
             </ul>
             {showAddCard && (
-                <Link to="/addCard">
+                <Link to="/add-card">
                     <button
                         type="button"
-                        className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
+                        className="ml-10 mb-48 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
                     >
                         Add Card
                     </button>
                 </Link>
             )}
+            <Footer />
         </div>
     );
 }

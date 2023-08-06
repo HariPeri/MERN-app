@@ -9,6 +9,7 @@ import CardInfo from '../shared/CardInfo';
 import { TDeck } from '../shared/TDeck';
 import { FilterOption } from '../shared/types';
 import useAuthContext from '../hooks/useAuthContext';
+import Footer from '../shared/Footer';
 
 function PlayerCards() {
     const [showAddCard, setShowAddCard] = useState<boolean>(false);
@@ -45,6 +46,10 @@ function PlayerCards() {
         'allCards',
     ]);
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+
+    const playerCardsStyles = showAddCard
+        ? 'mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+        : ' mt-16 mb-64 flex gap-8 ml-12 flex-wrap text-white font-xl italic';
 
     const handleToggleFilters = () => {
         setIsFilterOpen((prevIsFilterOpen) => !prevIsFilterOpen);
@@ -168,11 +173,10 @@ function PlayerCards() {
                 )}
             </div>
 
-            <ul className="cards mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic">
+            <ul className={playerCardsStyles}>
                 {filteredCards.length === 0 ? (
                     <li>
-                        {' '}
-                        No Cards in your Collection match the selected filters.{' '}
+                        No Cards in your Collection match the selected filters.
                     </li>
                 ) : (
                     filteredCards.map((card) => (
@@ -186,15 +190,16 @@ function PlayerCards() {
                 )}
             </ul>
             {showAddCard && (
-                <Link to="/addCard">
+                <Link to="/add-card">
                     <button
                         type="button"
-                        className="ml-10 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
+                        className="ml-10 mb-48 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
                     >
                         Add Card
                     </button>
                 </Link>
             )}
+            <Footer />
         </div>
     );
 }

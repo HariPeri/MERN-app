@@ -9,6 +9,7 @@ import { MdCloudUpload } from 'react-icons/md';
 import Navbar from '../shared/Navbar';
 import HText from '../shared/HText';
 import useAuthContext from '../hooks/useAuthContext';
+import Footer from '../shared/Footer';
 
 function CardInput() {
     const inputStyles =
@@ -75,7 +76,7 @@ function CardInput() {
     useEffect(() => {
         // Check if the selected option should trigger navigation
         if (playerName === 'redirect') {
-            navigate('/addPlayer');
+            navigate('/add-player');
         }
     }, [playerName, navigate]);
 
@@ -146,7 +147,7 @@ function CardInput() {
     }
 
     return (
-        <div>
+        <div className="h-100%">
             <Navbar />
             <div className="mt-10 w-1/2 mx-auto">
                 <div className="text-center mb-8">
@@ -406,12 +407,13 @@ function CardInput() {
 
                     <button
                         type="submit"
-                        className="md:w-64 sm:w-full xs:w-full bg-white mx-auto hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
+                        className="md:w-64 sm:w-full xs:w-full mb-48 bg-white mx-auto hover:text-white border-black border-2 p-3 rounded-md hover:bg-blue-600 transition-all duration-500"
                     >
                         Create Card
                     </button>
                 </form>
             </div>
+            <Footer />
         </div>
     );
 }
