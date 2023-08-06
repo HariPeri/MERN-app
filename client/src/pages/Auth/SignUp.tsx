@@ -1,11 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../shared/Navbar';
 import useSignUp from '../../hooks/useSignUp';
+import useAuthContext from '../../hooks/useAuthContext';
 
 function SignUp() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const { signup, error, isLoading } = useSignUp();
+    const navigate = useNavigate();
+
+    const {
+        state: { user },
+    } = useAuthContext();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

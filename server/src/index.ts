@@ -34,16 +34,16 @@ app.get("/cards/:playerID", async (req: Request, res: Response) => {
   if (!selectedPlayer) {
     return res.status(404).json({ message: "Player not found" });
   }
-  console.log("Raw Data: ", selectedPlayer);
+  // console.log("Raw Data: ", selectedPlayer);
   // Get the cardIDs associated with the player
   const cardIDs = selectedPlayer[0].cardID;
 
-  console.log("Extracted IDs: ", cardIDs);
+  //console.log("Extracted IDs: ", cardIDs);
 
   // Find all the cards whose _id matches any value in the cardIDs array
   const cards = await Card.find({ _id: { $in: cardIDs } });
 
-  console.log("Card Data: ", cards);
+  // console.log("Card Data: ", cards);
 
   // If no cards are found for the player, return an empty array
   if (!cards || cards.length === 0) {
@@ -101,7 +101,7 @@ app.post("/players", requireAuth, async (req: Request, res: Response) => {
     await existingPlayer.save();
     res.json(existingPlayer);
 
-    console.log("Player updated:", existingPlayer);
+    //console.log("Player updated:", existingPlayer);
   } else {
     // Step 3: Player doesn't exist, create a new player with the new cardId
     const newPlayer = new Player({
@@ -113,7 +113,7 @@ app.post("/players", requireAuth, async (req: Request, res: Response) => {
     const createdPlayer = await newPlayer.save();
     res.json(createdPlayer);
 
-    console.log("New player created:", newPlayer);
+    //console.log("New player created:", newPlayer);
   }
 });
 

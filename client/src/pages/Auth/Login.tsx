@@ -1,16 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../shared/Navbar';
 import useLogin from '../../hooks/useLogin';
+import useAuthContext from '../../hooks/useAuthContext';
 
 function Login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const { login, error, isLoading } = useLogin();
+    const navigate = useNavigate();
+
+    const {
+        state: { user },
+    } = useAuthContext();
+
+    useEffect(() => {
+        if (user) {
+            navigate('/');
+        }
+    }, [user, navigate]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        await login(email, password);
+        try {
+            await login(email, password);
+            // The code inside this block will run after the login function completes successfully
+            navigate('/');
+        } catch (err) {
+            setEmail('');
+            setPassword('');
+        }
     };
     return (
         <div className="bg-blue-200 h-full text-black">

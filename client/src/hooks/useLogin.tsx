@@ -23,6 +23,7 @@ const useLogin = () => {
         if (!response.ok) {
             setIsLoading(false);
             setError(json.error);
+            throw new Error('Login Failed');
         }
 
         if (response.ok) {

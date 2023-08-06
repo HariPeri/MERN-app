@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { MdCloudUpload } from 'react-icons/md';
 import Navbar from '../shared/Navbar';
-
 import HText from '../shared/HText';
+import useAuthContext from '../hooks/useAuthContext';
 
 function CardInput() {
     const inputStyles =
@@ -25,6 +25,10 @@ function CardInput() {
     const [players, setPlayers] = useState([]);
 
     const navigate = useNavigate();
+
+    const {
+        state: { user },
+    } = useAuthContext();
 
     function convertToBase64Front(e: React.ChangeEvent<HTMLInputElement>) {
         const reader = new FileReader();
@@ -84,6 +88,10 @@ function CardInput() {
     async function handleCreateCard(e: React.FormEvent) {
         e.preventDefault(); // This is done so that we don't refresh the page and lose all of our data
 
+        if (!user) {
+            return;
+        }
+
         const isValid = await trigger();
 
         if (isValid) {
@@ -113,6 +121,7 @@ function CardInput() {
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
                 },
             });
 
@@ -128,6 +137,7 @@ function CardInput() {
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
                 },
             });
 

@@ -26,6 +26,7 @@ const requireAuth: RequestHandler = async (
 
   // Grabs the token
   const token = authorization.split(" ")[1];
+  console.log(token);
 
   try {
     // verify the token to make sure that it wasn't tampered with
