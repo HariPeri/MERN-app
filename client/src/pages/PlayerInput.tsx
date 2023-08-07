@@ -113,6 +113,7 @@ function PlayerInput() {
                         <div className="flex justify-between gap-4">
                             <input
                                 className={inputStyles}
+                                id="cardandplayerInput-autofill-input"
                                 value={playerName}
                                 type="text"
                                 placeholder="PLAYER NAME"
@@ -138,6 +139,7 @@ function PlayerInput() {
 
                             <input
                                 className={inputStyles}
+                                id="cardandplayerInput-autofill-input"
                                 value={currTeam}
                                 type="text"
                                 placeholder="Current Team"

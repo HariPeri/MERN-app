@@ -84,7 +84,7 @@ function Navbar() {
                         className="rounded-md bg-union-gold px-4 py-3 my-7 transition duration-300 hover:bg-orange-700 hover:text-white mr-8"
                         type="button"
                     >
-                        Contact Me!
+                        <Link to="/contact-me">Contact Me!</Link>
                     </button>
                     {!user && (
                         <div className="mr-4 mt-4">

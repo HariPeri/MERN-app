@@ -45,11 +45,25 @@ function PlayerCards() {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([
         'allCards',
     ]);
+    const [playerCardsStyles, setPlayerCardsStyles] = useState<string>('');
     const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
-    const playerCardsStyles = showAddCard
-        ? 'mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
-        : ' mt-16 mb-64 flex gap-8 ml-12 flex-wrap text-white font-xl italic';
+    useEffect(() => {
+        // Check conditions and set playerCardsStyles accordingly
+        if (showAddCard) {
+            setPlayerCardsStyles(
+                'mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+            );
+        } else if (filteredCards.length === 0) {
+            setPlayerCardsStyles(
+                'mt-16 mb-[550px] flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+            );
+        } else {
+            setPlayerCardsStyles(
+                'mt-16 mb-64 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+            );
+        }
+    }, [showAddCard, filteredCards]);
 
     const handleToggleFilters = () => {
         setIsFilterOpen((prevIsFilterOpen) => !prevIsFilterOpen);

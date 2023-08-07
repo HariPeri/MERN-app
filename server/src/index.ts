@@ -24,8 +24,14 @@ app.use("/api/user", userRoutes); // Registers the routes
 /*****************GET REQUESTS*****************/
 
 app.get("/cards", async (req: Request, res: Response) => {
-  const cards = await Card.find();
-  res.json(cards);
+  try {
+    const cards = await Card.find().sort({ $natural: -1 });
+    res.json(cards);
+    console.log(cards);
+  } catch (error) {
+    // Handle any errors that may occur during the database query
+    res.status(500).json({ error: "Failed to retrieve cards" });
+  }
 });
 
 app.get("/cards/:playerID", async (req: Request, res: Response) => {

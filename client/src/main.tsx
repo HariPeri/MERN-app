@@ -11,6 +11,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
 import RecentAdditions from './pages/RecentAdditions';
+import ContactMe from './pages/ContactMePage/ContactMe';
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
     {
         path: '/signup',
         element: <SignUp />,
+    },
+    {
+        path: 'contact-me',
+        element: <ContactMe />,
     },
 ]);
 

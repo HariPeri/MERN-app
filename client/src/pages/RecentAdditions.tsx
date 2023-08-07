@@ -26,7 +26,7 @@ function RecentAdditions() {
 
     const cardStyles = showAddCard
         ? 'mt-16 mb-8 flex gap-8 ml-12 flex-wrap text-white font-xl italic'
-        : ' mt-16 mb-64 flex gap-8 ml-12 flex-wrap text-white font-xl italic';
+        : ' mt-16 mb-72 flex gap-8 ml-12 flex-wrap text-white font-xl italic';
 
     useEffect(() => {
         // Only happens on first render [empty Dependencies array]

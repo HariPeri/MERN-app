@@ -4,6 +4,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+@tailwind base;: This directive includes the base styles provided by Tailwind CSS. 
+It sets default styles for elements like headings, paragraphs, links, and form inputs. 
+
+@tailwind components;: This directive includes the pre-built components provided by Tailwind CSS. 
+These components are ready-to-use UI building blocks, such as buttons, cards, navigation bars, modals, and more. 
+
+@tailwind utilities;: This directive includes the utility classes provided by Tailwind CSS. 
+Examples of utility classes include margin, padding, text color, background color, flexbox, and grid-related classes.  
+*/
+
+/* Resets color after browser autofill for contact us form */
+#custom-autofill-input:-webkit-autofill,
+#custom-autofill-input:-webkit-autofill:focus {
+    border: 1px solid #253341;
+    -webkit-text-fill-color: #b38708;
+    -webkit-box-shadow: 0 0 0px 1000px #002d55 inset;
+    box-shadow: 0 0 0px 1000px #002d55 inset;
+    transition: background-color 5000000000s ease-in-out 0s;
+    color: white;
+}
+/* Rests autofill colors for the cardInput */
+
+#cardandplayerInput-autofill-input:-webkit-autofill,
+#cardandplayerInput-autofill-input:-webkit-autofill:focus {
+    border: 1px solid #253341;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #42a5f5 inset;
+    box-shadow: 0 0 0px 1000px #42a5f5 inset;
+    transition: background-color 5000000000s ease-in-out 0s;
+    color: white;
+}
+
 @layer components {
     .blinking-cursor:after {
         content: '|';
@@ -17,17 +50,6 @@
         }
     }
 }
-
-/*
-@tailwind base;: This directive includes the base styles provided by Tailwind CSS. 
-It sets default styles for elements like headings, paragraphs, links, and form inputs. 
-
-@tailwind components;: This directive includes the pre-built components provided by Tailwind CSS. 
-These components are ready-to-use UI building blocks, such as buttons, cards, navigation bars, modals, and more. 
-
-@tailwind utilities;: This directive includes the utility classes provided by Tailwind CSS. 
-Examples of utility classes include margin, padding, text color, background color, flexbox, and grid-related classes.  
-*/
 
 html, /* css selectors but because they are separated by commas, everything in the .app will be applied to the html and body tags, as well as everything with an id of root [id = #] */
 body,

@@ -12,20 +12,21 @@ function Footer() {
                 </div>
             </div>
             <div className="basis-1/3 bg-union-gold">
-                <div className="py-12 gap-4 text-xl flex text-union-blue group">
-                    <div className="w-1/3 text-center italic">
-                        Join the MLS Collectors Group to see my mailday posts!
+                <div className="px-16 mt-10 gap-4 text-xl flex text-union-blue group">
+                    <div className="w-1/3 text-center italic font-bold">
+                        Join the MLS Facebook Collectors Group to see my mailday
+                        posts!
                     </div>
                     {/* Carat */}
-                    <div className="border-union-blue w-2 h-2 border-t-2 mt-10 border-r-2 transform rotate-45 transition-all duration-500 group-hover:translate-x-3" />
-                    <div className="bg-union-blue w-1/3 text-union-gold text-center p-6 ml-4">
-                        <a
-                            href="https://www.facebook.com/groups/573102782893279"
-                            target="blank_"
-                        >
+                    <div className="border-union-blue w-2 h-2 border-t-2 mt-16 border-r-2 transform rotate-45 transition-all duration-500 group-hover:translate-x-3" />
+                    <a
+                        href="https://www.facebook.com/groups/573102782893279"
+                        target="blank_"
+                    >
+                        <div className="bg-union-blue text-union-gold text-center p-6 ml-4 italic mt-8 ">
                             MLS COLLECTORS
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div className="basis-1/3 bg-union-gold">

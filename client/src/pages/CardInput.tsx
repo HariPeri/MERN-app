@@ -306,6 +306,7 @@ function CardInput() {
 
                         <input
                             className={inputStyles}
+                            id="cardandplayerInput-autofill-input"
                             value={year}
                             type="text"
                             placeholder="YEAR"
@@ -331,6 +332,7 @@ function CardInput() {
 
                         <input
                             className={inputStyles}
+                            id="cardandplayerInput-autofill-input"
                             value={cardSet}
                             type="text"
                             placeholder="CARD SET"
@@ -356,6 +358,7 @@ function CardInput() {
 
                         <input
                             className={inputStyles}
+                            id="cardandplayerInput-autofill-input"
                             value={cardType}
                             type="text"
                             placeholder="CARD TYPE"
@@ -381,6 +384,7 @@ function CardInput() {
 
                         <input
                             className={inputStyles}
+                            id="cardandplayerInput-autofill-input"
                             value={color}
                             type="text"
                             placeholder="COLOR"
