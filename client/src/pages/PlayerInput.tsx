@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdCloudUpload } from 'react-icons/md';
 import HText from '../shared/HText';
 import Navbar from '../shared/Navbar';
+import useAuthContext from '../hooks/useAuthContext';
 
 function PlayerInput() {
     const inputStyles =
@@ -27,6 +28,9 @@ function PlayerInput() {
             };
         }
     }
+    const {
+        state: { user },
+    } = useAuthContext();
 
     const {
         register,
@@ -36,6 +40,10 @@ function PlayerInput() {
 
     async function handleCreatePlayer(e: React.FormEvent) {
         e.preventDefault(); // This is done so that we don't refresh the page and lose all of our data
+
+        if (!user) {
+            return;
+        }
 
         const isValid = await trigger();
 
@@ -50,10 +58,11 @@ function PlayerInput() {
                 }),
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
                 },
             });
 
-            navigate('/addCard');
+            navigate('/add-card');
         }
     }
     return (

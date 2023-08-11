@@ -31,7 +31,7 @@ function Navbar() {
 
     return (
         // div containing entire navbar (using flex for row view)
-        <div className="flex h-24 bg-blue-900 text-white">
+        <div className="flex h-24 bg-blue-900 text-white border-t-4 border-union-gold">
             {/* YIW + Logo (allocating 1/3 space for div, centered vertically) */}
             <div className="ml-12 flex gap-3 items-center basis-1/3 text-3xl font-bold">
                 {/* inserting uva wise logo inside div */}

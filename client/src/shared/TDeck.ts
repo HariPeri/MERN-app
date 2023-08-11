@@ -10,4 +10,5 @@ export type TDeck = {
     cardNumber?: string;
     cardNumberedOutOf?: string;
     dateAcquired?: string;
+    orientation: string;
 };

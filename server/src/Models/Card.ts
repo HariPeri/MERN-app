@@ -14,6 +14,7 @@ const Card = new Schema({
   cardNumber: String,
   cardNumberedOutOf: String,
   dateAcquired: String,
+  orientation: String,
 });
 
 const MyModel = mongoose.model("Card", Card); // First Card is way that we represent model and second card is the model we are actually referring to

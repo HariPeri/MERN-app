@@ -49,8 +49,9 @@ function RecentAdditions() {
                         key={card._id}
                     >
                         <CardInfo
-                            frontCardImage={`${card.frontCardImage}`}
-                            playername={`${card.playerName}`}
+                            frontCardImage={card.frontCardImage}
+                            playername={card.playerName}
+                            orientation={card.orientation}
                         />
                     </li>
                 ))}

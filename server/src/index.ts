@@ -13,7 +13,15 @@ import requireAuth from "./middleware/requireAuth";
 const app = express(); // When we call the function, we get back this app
 const PORT = 3001; // Good to always make your ports as constant var
 
-app.use(express.json()); // We use this middleware function that allows us to make json post requests [will always run before our endpoints]
+var bodyParser = require("body-parser");
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 app.use(
   cors({
     origin: "*",
@@ -86,6 +94,7 @@ app.post("/cards", requireAuth, async (req: Request, res: Response) => {
     cardNumber: req.body.cardNumber,
     cardNumberedOutOf: req.body.cardNumberedOutOf,
     dateAcquired: req.body.dateAcquired,
+    orientation: req.body.orientation,
 
     // the request is a json so we take in the body and then specifically the title part and that will be the new title of our object in the collection
   }); // Normal OOP where we are creating an object that takes in a javascript object with a title since that is in our myModel schema

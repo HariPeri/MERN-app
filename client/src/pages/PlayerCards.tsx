@@ -27,6 +27,7 @@ function PlayerCards() {
             setShowAddCard(true);
         } else setShowAddCard(false);
     }, [userEmail, personalEmail]);
+
     // Prevents continuous rendering since filterOptions is a dependency of the useEffect hook
     const filterOptions = useMemo<FilterOption[]>(
         () => [
@@ -56,7 +57,7 @@ function PlayerCards() {
             );
         } else if (filteredCards.length === 0) {
             setPlayerCardsStyles(
-                'mt-16 mb-[550px] flex gap-8 ml-12 flex-wrap text-white font-xl italic'
+                'mt-16 mb-[575px] flex gap-8 ml-12 flex-wrap text-white font-xl italic'
             );
         } else {
             setPlayerCardsStyles(
@@ -77,11 +78,7 @@ function PlayerCards() {
         } else {
             setSelectedFilters((prevFilters) => {
                 if (prevFilters.includes('allCards')) {
-                    // If "All Cards" filter is selected, remove it and select only the clicked filter
-                    let newFilters = prevFilters.filter(
-                        (item) => item !== 'allCards'
-                    );
-                    newFilters = [filter];
+                    const newFilters = [filter];
                     return newFilters;
                 }
                 // Toggle the individual filter
@@ -196,8 +193,9 @@ function PlayerCards() {
                     filteredCards.map((card) => (
                         <li key={card._id}>
                             <CardInfo
-                                frontCardImage={`${card.frontCardImage}`}
-                                playername={`${card.playerName}`}
+                                frontCardImage={card.frontCardImage}
+                                playername={card.playerName}
+                                orientation={card.orientation}
                             />
                         </li>
                     ))
@@ -207,7 +205,7 @@ function PlayerCards() {
                 <Link to="/add-card">
                     <button
                         type="button"
-                        className="ml-10 mb-48 w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
+                        className="ml-10 mb-[575px] w-32 border-black border-2 p-3 rounded-md bg-white hover:bg-gray-300 transition-all duration-500"
                     >
                         Add Card
                     </button>
