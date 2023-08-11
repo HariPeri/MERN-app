@@ -31,12 +31,12 @@ function HomeCardsCarousel() {
     });
 
     return (
-        <div className="relative w-1/2 mx-auto">
+        <div className="w-1/2 mx-auto">
             <div className="flex transition-transform duration-300">
                 {displayedCards.map((card: THomeCard, index) => (
                     <div
                         key={card._id}
-                        className={`flex-shrink-0 border border-gray-300 rounded-lg shadow-lg ${
+                        className={`border border-gray-300 rounded-lg shadow-lg ${
                             index === 1
                                 ? 'transition scale-110 hover:scale-125'
                                 : 'scale-75'
@@ -47,6 +47,7 @@ function HomeCardsCarousel() {
                         <img
                             src={card.frontCardImage}
                             alt={`${index + 1} is not available`}
+                            width="240"
                             className="object-cover rounded-lg"
                         />
                     </div>

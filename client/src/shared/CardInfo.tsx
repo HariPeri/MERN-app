@@ -5,9 +5,7 @@ type Props = {
 };
 
 function CardInfo({ frontCardImage, playername, orientation }: Props) {
-    console.log(orientation);
     const isVertical = orientation === 'vertical' || orientation === undefined;
-    console.log(isVertical);
 
     return (
         <div>

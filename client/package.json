@@ -10,6 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@heroicons/react": "^2.0.18",
         "@react-spring/parallax": "^9.7.3",
         "framer-motion": "^10.15.0",
         "lodash": "^4.17.21",

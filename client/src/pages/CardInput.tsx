@@ -298,73 +298,63 @@ function CardInput() {
                             ))}
                             <option value="redirect">ADD A PLAYER</option>
                         </select>
-
                         {errors.player && (
                             <p className=" text-primary-500">
                                 {errors.player.type === 'required' &&
                                     'This field is required'}
                             </p>
                         )}
-                        <div className="grid grid-cols-2">
-                            <div>
-                                <input
-                                    className={inputStyles}
-                                    id="cardandplayerInput-autofill-input"
-                                    value={year}
-                                    type="text"
-                                    placeholder="YEAR"
-                                    {...register('year', {
-                                        required: true,
-                                        maxLength: 100,
-                                    })}
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLInputElement>
-                                    ) => {
-                                        setYear(e.target.value);
-                                    }}
-                                />
 
-                                {errors.year && (
-                                    <p className=" text-primary-500">
-                                        {errors.year.type === 'required' &&
-                                            'This field is required.'}
-                                        {errors.year.type === 'maxLength' &&
-                                            'Max Length is 100 characters.'}
-                                    </p>
-                                )}
-                            </div>
-                            <div>
-                                <select
-                                    className={`${inputStyles} border-r-8 border-transparent`}
-                                    value={orientation}
-                                    {...register('orientation', {
-                                        required: true,
-                                    })}
-                                    onChange={(
-                                        e: React.ChangeEvent<HTMLSelectElement>
-                                    ) => {
-                                        setOrientation(e.target.value);
-                                    }}
-                                >
-                                    <option value="">
-                                        {' '}
-                                        Choose an Orientation{' '}
-                                    </option>
-                                    <option value="vertical">Vertical</option>
-                                    <option value="horizontal">
-                                        Horizontal
-                                    </option>
-                                </select>
+                        <input
+                            className={inputStyles}
+                            id="cardandplayerInput-autofill-input"
+                            value={year}
+                            type="text"
+                            placeholder="YEAR"
+                            {...register('year', {
+                                required: true,
+                                maxLength: 100,
+                            })}
+                            onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                                setYear(e.target.value);
+                            }}
+                        />
 
-                                {errors.orientation && (
-                                    <p className=" text-primary-500">
-                                        {errors.orientation.type ===
-                                            'required' &&
-                                            'This field is required'}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                        {errors.year && (
+                            <p className=" text-primary-500">
+                                {errors.year.type === 'required' &&
+                                    'This field is required.'}
+                                {errors.year.type === 'maxLength' &&
+                                    'Max Length is 100 characters.'}
+                            </p>
+                        )}
+
+                        <select
+                            className={`${inputStyles} border-r-8 border-transparent`}
+                            value={orientation}
+                            {...register('orientation', {
+                                required: true,
+                            })}
+                            onChange={(
+                                e: React.ChangeEvent<HTMLSelectElement>
+                            ) => {
+                                setOrientation(e.target.value);
+                            }}
+                        >
+                            <option value=""> Choose an Orientation </option>
+                            <option value="vertical">Vertical</option>
+                            <option value="horizontal">Horizontal</option>
+                        </select>
+
+                        {errors.orientation && (
+                            <p className=" text-primary-500">
+                                {errors.orientation.type === 'required' &&
+                                    'This field is required'}
+                            </p>
+                        )}
+
                         <input
                             className={inputStyles}
                             id="cardandplayerInput-autofill-input"
@@ -381,7 +371,6 @@ function CardInput() {
                                 setCardSet(e.target.value);
                             }}
                         />
-
                         {errors.cardset && (
                             <p className=" text-primary-500">
                                 {errors.cardset.type === 'required' &&
@@ -390,7 +379,6 @@ function CardInput() {
                                     'Max Length is 100 characters.'}
                             </p>
                         )}
-
                         <input
                             className={inputStyles}
                             id="cardandplayerInput-autofill-input"
@@ -407,7 +395,6 @@ function CardInput() {
                                 setCardType(e.target.value);
                             }}
                         />
-
                         {errors.cardtype && (
                             <p className=" text-primary-500">
                                 {errors.cardtype.type === 'required' &&
@@ -416,7 +403,6 @@ function CardInput() {
                                     'Max Length is 100 characters.'}
                             </p>
                         )}
-
                         <input
                             className={inputStyles}
                             id="cardandplayerInput-autofill-input"
@@ -433,7 +419,6 @@ function CardInput() {
                                 setColor(e.target.value);
                             }}
                         />
-
                         {errors.cardcolor && (
                             <p className=" text-primary-500">
                                 {errors.cardcolor.type === 'required' &&
