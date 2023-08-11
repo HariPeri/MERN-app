@@ -123,7 +123,7 @@ function ContactMeForm() {
                 <div className="flex justify-center mb-24">
                     <button
                         type="submit"
-                        className="mt-5 mb-12 rounded-lg bg-union-blue px-20 py-3 transition duration-500 hover:text-white"
+                        className="mt-5 mb-12 rounded-lg bg-union-blue px-20 py-3 transition duration-500 text-white hover:text-union-gold"
                     >
                         SUBMIT
                     </button>

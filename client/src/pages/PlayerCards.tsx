@@ -175,7 +175,7 @@ function PlayerCards() {
                                 Apply Filters
                             </button>
                             {selectedFilters.length === 0 && (
-                                <div className=" text-red-500">
+                                <div className=" text-red-500 text-center">
                                     Please select an option
                                 </div>
                             )}

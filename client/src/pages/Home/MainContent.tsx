@@ -26,7 +26,7 @@ function MainContent() {
                     </div>
                 </div>
                 <div className="text-white">
-                    <div className="mx-auto w-[1000px] bg-blue-300 p-10 my-36 rounded-3xl">
+                    <div className="mx-auto w-[1000px] bg-union-blue p-10 my-36 rounded-3xl border-4 border-white shadow-lg shadow-white">
                         <div className="mb-8 text-xl">
                             My name is Hari and I&apos;ve been collecting cards
                             for the last 3 years. It has been a long process but
