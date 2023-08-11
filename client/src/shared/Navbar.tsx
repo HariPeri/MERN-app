@@ -21,7 +21,7 @@ function Navbar() {
     } = useAuthContext();
 
     const [isMenuToggled, setMenuToggled] = useState<boolean>(false);
-    const isAboveMediumScreens: boolean = useMediaQuery('(min-width: 1253px)'); // returns a bool val as per the custom hook we created that takes in a media query string
+    const isAboveMediumScreens: boolean = useMediaQuery('(min-width: 1205px)'); // returns a bool val as per the custom hook we created that takes in a media query string
     // in this case that string is the min-width of 1060 so it will return true if the viewport size is greater than 1060px
     // media queries must have paranthesees around them
 
@@ -47,15 +47,15 @@ function Navbar() {
         // div containing entire navbar (using flex for row view)
         <nav className="flex h-24 bg-union-blue text-white border-t-4 border-union-gold">
             {/* YIW + Logo (allocating 1/3 space for div, centered vertically) */}
-            <div className="ml-12 flex gap-3 items-center basis-1/4 text-3xl font-bold">
+            <div className="ml-12 flex gap-3 items-center basis-1/5 text-3xl font-bold">
                 {/* inserting uva wise logo inside div */}
                 <Link to="/"> My Collection </Link>
             </div>
 
             {isAboveMediumScreens ? (
-                <div className="flex items-center basis-3/4 justify-end font-bold">
+                <div className="flex items-center basis-4/5 justify-end font-bold">
                     {/* List of headers (flex for row view, gap between list items with margin on right) */}
-                    <ul className="flex gap-8 mr-12">
+                    <ul className="flex gap-12 mr-12">
                         {/* changing hover text color with a transition time of 300ms */}
                         <li>
                             <Link
@@ -81,20 +81,20 @@ function Navbar() {
                                 Recent Additions
                             </Link>
                         </li>
-                        <li className="relative ">
+                        <li className="relative mr-8">
                             Wantlist
                             <div className="absolute left-0 -top-6 -rotate-12 h-[100px] w-[100px]  ">
                                 <img src={ComingSoon} alt="ComingSoon.png" />
                             </div>
                         </li>
-                        <li className="relative ">
+                        <li className="relative mr-8 ">
                             Tradelist
                             <div className="absolute left-0 -top-6 -rotate-12 h-[100px] w-[100px]  ">
                                 <img src={ComingSoon} alt="ComingSoon.png" />
                             </div>
                         </li>
                     </ul>
-                    <div className="flex">
+                    <div className="flex gap-2">
                         <button
                             className="rounded-md bg-union-gold px-4 py-3 my-7 transition duration-300 hover:bg-orange-700 hover:text-white mr-8"
                             type="button"

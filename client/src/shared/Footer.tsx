@@ -88,11 +88,11 @@ function Footer() {
 
             <div className="w-full md:w-1/3 bg-union-gold">
                 <div className="px-6 md:px-12 py-8 md:py-12 text-center md:text-left flex flex-col">
-                    <h2 className="font-bold text-lg md:text-xl mb-2">
+                    <h2 className="font-bold text-lg md:text-3xl mb-2">
                         Check out my projects!
                     </h2>
-                    <p className="text-base md:text-lg font-normal mb-4">
-                        Socials
+                    <p className="text-base md:text-xl font-normal mb-4">
+                        Socials:
                     </p>
                     <div className="flex justify-center md:justify-start gap-4">
                         <a
